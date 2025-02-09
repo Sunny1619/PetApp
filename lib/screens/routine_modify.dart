@@ -156,7 +156,7 @@ class _RoutineModifyPageState extends State<RoutineModifyPage> {
                 onPressed: () async {
                   await _saveRoutineLocally();
                   SharedPreferences prefs = await SharedPreferences.getInstance();
-                  await prefs.setBool('onboarding_complete', true);
+                  await prefs.setBool('onboardingComplete', true);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => HomeScreen()),

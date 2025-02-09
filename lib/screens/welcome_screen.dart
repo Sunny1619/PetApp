@@ -49,10 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
                 // Get Started Button
                 ElevatedButton(
-                  onPressed: () async {
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
-                    await prefs.setBool('first_time', false);
-
+                  onPressed: () {
                     Navigator.pushReplacement(
                       context,
                       PageRouteBuilder(

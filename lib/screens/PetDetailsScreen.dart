@@ -74,15 +74,12 @@ class _PetDetailsScreenState extends State<PetDetailsScreen> {
                 SizedBox(height: 20),
 
                 ElevatedButton(
-                  onPressed: () async {
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
+                  onPressed: () {
                     if (_nameController.text.isNotEmpty &&
                         _typeController.text.isNotEmpty &&
                         _breedController.text.isNotEmpty &&
                         _weightController.text.isNotEmpty &&
                         _ageController.text.isNotEmpty) {
-                      await prefs.setBool('pet_details_entered', true);
-
                       // Navigate to RoutineModifyPage
                       Navigator.push(
                         context,
