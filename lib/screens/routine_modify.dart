@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:petapp3/screens/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class RoutineModifyPage extends StatefulWidget {
   @override
@@ -41,6 +44,12 @@ class _RoutineModifyPageState extends State<RoutineModifyPage> {
         routineTasks[index] = editedTask;
       });
     }
+  }
+
+  Future<void> _saveRoutineLocally() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String routineJson = jsonEncode(routineTasks);
+    await prefs.setString('routine', routineJson);
   }
 
   @override
@@ -144,8 +153,14 @@ class _RoutineModifyPageState extends State<RoutineModifyPage> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
+                onPressed: () async {
+                  await _saveRoutineLocally();
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('onboarding_complete', true);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
                 },
                 child: Text('Next', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 style: ElevatedButton.styleFrom(
