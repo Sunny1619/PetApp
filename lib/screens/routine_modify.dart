@@ -157,10 +157,12 @@ class _RoutineModifyPageState extends State<RoutineModifyPage> {
                   await _saveRoutineLocally();
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   await prefs.setBool('onboardingComplete', true);
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => HomeScreen()),
+                        (Route<dynamic> route) => false, // Removes all previous routes
                   );
+
                 },
                 child: Text('Next', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 style: ElevatedButton.styleFrom(

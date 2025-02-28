@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:petapp3/screens/home_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/welcome_screen.dart';
+import 'package:petapp3/screens/home_screen.dart';
+import 'package:petapp3/screens/welcome_screen.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, // Uses Firebase config
+  );
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   bool onboardingComplete = prefs.getBool('onboardingComplete') ?? false;
 
